@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kenz Coffee House | Yemeni Organic Brews in Canton, MI</title>
+    <meta name="description" content="Where Yemeni Organic Brews Meet Cultural Ambiance. Located in Canton, MI.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables for Color Palette */
+        :root {
+            --espresso: #2B1810;
+            --dark-brown: #3E2723;
+            --warm-brown: #5D4037;
+            --gold: #C5A059;
+            --light-gold: #E2C792;
+            --cream: #FDFBF7;
+            --off-white: #F4EFE6;
+            --text-dark: #1A1A1A;
+            --text-light: #FDFBF7;
+            
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* Base Reset & Typography */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            color: var(--espresso);
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.3s ease;
+        }
+
+        /* Reusable Classes */
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--gold);
+            margin: 1rem auto 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-family: var(--font-body);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-gold {
+            background-color: var(--gold);
+            color: var(--espresso);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-gold:hover {
+            background-color: transparent;
+            color: var(--gold);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            color: var(--cream);
+            border: 2px solid var(--cream);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--cream);
+            color: var(--espresso);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--espresso);
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--dark-brown);
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--espresso);
+        }
+
+        /* Hero Section */
+        #hero {
+            height: 100vh;
+            background: linear-gradient(rgba(43, 24, 16, 0.85), rgba(43, 24, 16, 0.9)), radial-gradient(circle, var(--warm-brown) 0%, var(--espresso) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--text-light);
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        /* Animated SVG Coffee Cup */
+        .hero-graphic {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+        
+        .steam {
+            animation: rise 3s infinite ease-in;
+            opacity: 0;
+        }
+        .steam:nth-child(2) { animation-delay: 1s; }
+        .steam:nth-child(3) { animation-delay: 2s; }
+        
+        @keyframes rise {
+            0% { transform: translateY(10px) scale(1); opacity: 0; }
+            50% { opacity: 0.6; }
+            100% { transform: translateY(-30px) scale(1.5); opacity: 0; }
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            color: var(--cream);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            font-style: italic;
+            color: var(--light-gold);
+            margin-bottom: 2.5rem;
+            font-family: var(--font-heading);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        /* About Section */
+        #about {
+            background-color: var(--cream);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .about-text p {
+            font-size: 1.1rem;
+            color: #444;
+        }
+
+        .about-highlight {
+            background-color: var(--off-white);
+            padding: 2.5rem;
+            border-left: 4px solid var(--gold);
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .about-highlight h4 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+        }
+
+        /* Menu Section */
+        #menu {
+            background-color: var(--espresso);
+            color: var(--cream);
+        }
+
+        #menu .section-title {
+            color: var(--cream);
+        }
+
+        .menu-note {
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 3rem;
+            color: var(--light-gold);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .menu-category h3 {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(197, 160, 89, 0.3);
+            padding-bottom: 0.5rem;
+        }
+
+        .menu-item {
+            margin-bottom: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+
+        .menu-item-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .menu-item-dots {
+            flex-grow: 1;
+            border-bottom: 1px dotted rgba(253, 251, 247, 0.3);
+            margin: 0 10px;
+        }
+        
+        .menu-item-price {
+            font-weight: 300;
+            font-size: 0.9rem;
+            color: var(--light-gold);
+        }
+
+        .menu-item-desc {
+            font-size: 0.9rem;
+            color: #ccc;
+            margin-top: 0.2rem;
+            display: block;
+        }
+
+        .badge {
+            background-color: var(--gold);
+            color: var(--espresso);
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 8px;
+            text-transform: uppercase;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+
+        /* Reviews Section */
+        #reviews {
+            background-color: var(--off-white);
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: var(--cream);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stars {
+            color: var(--gold);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .review-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+
+        .review-author {
+            font-weight: 600;
+            font-family: var(--font-heading);
+            color: var(--espresso);
+        }
+
+        /* Location Section */
+        #location {
+            background-color: var(--cream);
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .info-card {
+            background-color: var(--off-white);
+            padding: 2.5rem;
+            border-radius: 8px;
+        }
+
+        .info-card h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: var(--espresso);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hours-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 0.5rem;
+        }
+
+        .amenities {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .amenity-tag {
+            background-color: var(--espresso);
+            color: var(--gold);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #ddd;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--espresso);
+            color: var(--cream);
+            padding: 4rem 0 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-logo {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            color: var(--cream);
+        }
+        
+        .footer-logo span {
+            color: var(--gold);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.1);
+            color: var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--gold);
+            color: var(--espresso);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .about-grid, .location-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .map-container {
+                min-height: 300px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--cream);
+                padding: 1rem 0;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">Kenz<span>.</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">Our Story</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#location">Visit Us</a></li>
+                <li><a href="https://kenzcoffeebar.square.site" target="_blank" class="btn btn-gold" style="padding: 0.5rem 1rem; color: var(--espresso);">Order Online</a></li>
+            </ul>
+            <button class="mobile-menu-btn" id="menuBtn">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+        </div>
+    </nav>
+
+    <header id="hero">
+        <div class="hero-content">
+            <div class="hero-graphic">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <path class="steam" d="M 35 30 Q 30 15 40 5" fill="transparent" stroke="#C5A059" stroke-width="3" stroke-linecap="round"/>
+                    <path class="steam" d="M 50 35 Q 45 20 55 10" fill="transparent" stroke="#C5A059" stroke-width="3" stroke-linecap="round"/>
+                    <path class="steam" d="M 65 30 Q 60 15 70 5" fill="transparent" stroke="#C5A059" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M 20 40 L 80 40 L 75 80 Q 72 95 50 95 Q 28 95 25 80 Z" fill="none" stroke="#FDFBF7" stroke-width="4" stroke-linejoin="round"/>
+                    <path d="M 80 50 Q 95 50 95 65 Q 95 75 77 75" fill="none" stroke="#FDFBF7" stroke-width="4" stroke-linecap="round"/>
+                    <path d="M 10 95 Q 50 105 90 95" fill="none" stroke="#C5A059" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+            </div>
+            <h1>Kenz Coffee House</h1>
+            <p>Where Yemeni Organic Brews Meet Cultural Ambiance</p>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn btn-outline">View Menu</a>
+                <a href="https://kenzcoffeebar.square.site" target="_blank" class="btn btn-gold">Order Online</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Our Story</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <h3>A Treasure of the Canton Community</h3>
+                    <p>Founded by co-owners Abdulnaser Alnajjar and Moshtak Alamri, Kenz Coffee House is a transformation of space and spirit. We turned a former physical therapy office on Cherry Hill Road into a stylish, welcoming café designed for community connection.</p>
+                    <p>Our coffee beans are imported directly from Yemen — the historical birthplace of coffee. Every cup honors centuries of tradition, bringing rich, earthy flavors right here to Michigan. To ensure transparency, <strong>every item on our menu is priced with tax included</strong>, so there are no surprises at checkout.</p>
+                    <p>We are deeply committed to the Canton community. From sponsoring the Canton High School football and soccer teams to providing beverages for local organizations, we want "Kenz" — which means <em>treasure</em> in Arabic — to truly be a treasure for our neighbors.</p>
+                    <p>When you visit, you'll often find us mingling with guests to ensure every experience is perfect. Our promise: <em>If your coffee isn't right, we'll brew you another one on the spot.</em></p>
+                </div>
+                <div class="about-highlight">
+                    <div style="text-align:center; margin-bottom: 1.5rem;">
+                        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <h4>"Kenz" means treasure.</h4>
+                    <p style="margin: 0;">We pour that philosophy into every organic brew, every fresh pastry, and every smile shared across the counter. Whether you are hosting a book club or grabbing a quick morning latte, you are welcome here.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Our Menu</h2>
+            <p class="menu-note">All prices include tax. See in store for current pricing.<br>Fresh baked pastries available daily.</p>
+            
+            <div class="menu-grid">
+                <div class="menu-category">
+                    <h3>Traditional & Coffee</h3>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Yemeni Organic Coffee</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+                    <span class="menu-item-desc">Traditional organic brew imported directly from Yemen</span>
+                    
+                    <div class="menu-item" style="margin-top:1rem;">
+                        <span class="menu-item-name">Turkish Coffee</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+                    
+                    <div class="menu-item" style="margin-top:1rem;">
+                        <span class="menu-item-name">Husk / Qishr</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+                    <span class="menu-item-desc">Very low caffeine, light coffee flavor — a traditional Yemeni drink</span>
+
+                    <div class="menu-item" style="margin-top:1rem;">
+                        <span class="menu-item-name">Tea with Cardamom & Cream</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Specialty Drinks</h3>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Kenz Latte <span class="badge">Favorite</span></span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+                    
+                    <div class="menu-item" style="margin-top:1rem;">
+                        <span class="menu-item-name">Pistachio Latte</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+
+                    <div class="menu-item" style="margin-top:1rem;">
+                        <span class="menu-item-name">Iced Spanish Latte</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+
+                    <div class="menu-item" style="margin-top:1rem;">
+                        <span class="menu-item-name">Iced Brown Sugar Shaken Espresso</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+
+                    <div class="menu-item" style="margin-top:1rem;">
+                        <span class="menu-item-name">Caramel Macchiato</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+
+                    <div class="menu-item" style="margin-top:1rem;">
+                        <span class="menu-item-name">Matcha Latte</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+
+                    <div class="menu-item" style="margin-top:1rem;">
+                        <span class="menu-item-name">Wild Berry Drink / Refreshers</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+                </div>
+
+                <div class="menu-category">
+                    <h3>Pastries & Food</h3>
+                    <div class="menu-item">
+                        <span class="menu-item-name">Yemeni Honeycomb <span class="badge">Favorite</span></span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+                    <span class="menu-item-desc">Served warm, filled with cream cheese</span>
+
+                    <div class="menu-item" style="margin-top:1rem;">
+                        <span class="menu-item-name">Viral Fruit Cakes</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+
+                    <div class="menu-item" style="margin-top:1rem;">
+                        <span class="menu-item-name">Pistachio Milk Cake</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+
+                    <div class="menu-item" style="margin-top:1rem;">
+                        <span class="menu-item-name">Chocolate Croissant & Zaatar Pastry</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+
+                    <div class="menu-item" style="margin-top:1rem;">
+                        <span class="menu-item-name">Cheese Pie & Lemon Cake</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+
+                    <div class="menu-item" style="margin-top:1rem;">
+                        <span class="menu-item-name">Dubai Chocolate Bar</span>
+                        <div class="menu-item-dots"></div>
+                        <span class="menu-item-price">In Store</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://kenzcoffeebar.square.site" target="_blank" class="btn btn-gold">Order Online Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">What Our Customers Say</h2>
+            <div class="reviews-grid">
+                
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Kenz is an amazing addition to Canton. High quality drinks and food, amazing ambience and the service was wonderful. Very family friendly. We tried the Iced Spanish Latte and Iced Kenz Latte — both were delicious."</p>
+                    <p class="review-author">— Local Customer</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Best latte in town — they call it the Kenz Latte. Their cakes are exceptional and a must-try. Owners Naser and Abdul are very friendly and presentable. Overall 5/5 stars."</p>
+                    <p class="review-author">— Talal Food</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"The Turkish Coffee was everything I needed. The Yemeni Honeycomb Filled with Cream Cheese was my favorite — still warm when it arrived! Their prices are great, not jacked up like a lot of places."</p>
+                    <p class="review-author">— Local Guide</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"What a beautiful space! My book club hosted a meeting here — it's such a comfortable environment. The staff were lovely and offered us discounts for coming in."</p>
+                    <p class="review-author">— Lani B., Yelp</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"Love the crisp yet cozy interior design. The Husk/Qishr was on point. Chocolate pastry is tasty and not too sweet. Customer service from Khalid was exceptional, helpful and sincere."</p>
+                    <p class="review-author">— Recent Visitor</p>
+                </div>
+
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="review-text">"With so many options for coffee in metro Detroit, this place is actually good. It's not only well-appointed — it values quality coffee. Their roast is not your typical Yemeni roast... it's actually delicious."</p>
+                    <p class="review-author">— Coffee Enthusiast</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="location" class="section-padding">
+        <div class="container">
+            <h2 class="section-title">Visit Us</h2>
+            <div class="location-grid">
+                <div class="info-card">
+                    <h3>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                        Location & Hours
+                    </h3>
+                    <p style="font-size: 1.1rem; margin-bottom: 2rem;">
+                        <strong>Kenz Coffee House</strong><br>
+                        42456 Cherry Hill Rd<br>
+                        Canton, MI 48187<br>
+                        <a href="tel:7348922597" style="color:var(--gold); font-weight: 600;">(734) 892-2597</a>
+                    </p>
+
+                    <ul class="hours-list">
+                        <li><span>Monday – Thursday</span> <span>8:00 AM – 11:00 PM</span></li>
+                        <li><span>Friday – Saturday</span> <span>8:00 AM – 12:00 AM</span></li>
+                        <li><span>Sunday</span> <span>8:30 AM – 11:30 PM</span></li>
+                    </ul>
+
+                    <h4 style="margin-top: 2rem; margin-bottom: 1rem;">Amenities</h4>
+                    <div class="amenities">
+                        <span class="amenity-tag">Free WiFi</span>
+                        <span class="amenity-tag">Laptop-friendly</span>
+                        <span class="amenity-tag">Dine-in</span>
+                        <span class="amenity-tag">Takeout</span>
+                        <span class="amenity-tag">Delivery</span>
+                        <span class="amenity-tag">Wheelchair Accessible</span>
+                        <span class="amenity-tag">Accessible Parking</span>
+                        <span class="amenity-tag">Catering Available</span>
+                    </div>
+                </div>
+
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2950.48590680183!2d-83.48398108453472!3d42.308259979190176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x883b4decd8df3ab7%3A0xc3f8b0933758b746!2s42456%20Cherry%20Hill%20Rd%2C%20Canton%2C%20MI%2048187!5e0!3m2!1sen!2sus!4v1680000000000!5m2!1sen!2sus" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">Kenz<span>.</span></div>
+                <p>Where Yemeni Organic Brews Meet Cultural Ambiance</p>
+                <div class="social-links">
+                    <a href="https://instagram.com/kenzcoffeehouse" target="_blank" aria-label="Instagram">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                    </a>
+                    <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
+                    </a>
+                    <a href="https://kenzcoffeebar.square.site" target="_blank" aria-label="Order Online">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                    </a>
+                </div>
+                <p>Follow us on Instagram & Threads: <strong>@kenzcoffeehouse</strong></p>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Kenz Coffee House. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when a link is clicked
+        const navItems = document.querySelectorAll('.nav-links a');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Sticky Navbar shadow on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            } else {
+                nav.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+            }
+        });
+    </script>
+</body>
+</html>
